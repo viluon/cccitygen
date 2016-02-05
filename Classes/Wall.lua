@@ -2,6 +2,7 @@
 dofile "Classes/Grid3D.lua"
 dofile "Classes/Point3D.lua"
 dofile "Classes/Structure.lua"
+dofile "Classes/Material.lua"
 
 class "Wall" extends "Structure"
 {
@@ -10,8 +11,8 @@ class "Wall" extends "Structure"
 }
 
 function Wall:Wall( from, to, fill )
-	if not from:typeOf( Point3D ) or not to:typeOf( Point3D ) or not ( type( fill ) == "function" or fill:typeOf( Grid3D ) ) then
-		error( "Expected Point3D, Point3D, (Grid3D or fill function)", 2 )
+	if not from:typeOf( Point3D ) or not to:typeOf( Point3D ) or not ( type( fill ) == "function" or fill:typeOf( Grid3D ) or fill:typeOf( Material ) ) then
+		error( "Expected Point3D, Point3D, (Grid3D or Material or fill (function))", 3 )
 	end
 
 	self.a = from

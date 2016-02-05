@@ -11,6 +11,8 @@ function Mutator:Mutator( fn )
 	end
 
 	self.mutate = fn
+
+	self.link = nil
 end
 
 function Mutator:apply( ... )

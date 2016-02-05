@@ -1,4 +1,4 @@
-local x = 0
+
 class "Grid3D"
 {
 	size = {
@@ -12,14 +12,9 @@ class "Grid3D"
 		z = 0;
 	};
 	data = {};
-	id = 0;
 }
 
 function Grid3D:Grid3D( sizeX, sizeY, sizeZ, originX, originY, originZ, fill )
-	x = x + 1
-
-	self.id = x
-
 	if not sizeX then
 		print( "Warning: Initializing Grid3D with zero size isn't recommended." )
 		return
@@ -43,6 +38,7 @@ function Grid3D:Grid3D( sizeX, sizeY, sizeZ, originX, originY, originZ, fill )
 
 	self.data = {}
 
+	--TODO: Class should assign tostring automagically
 	self.meta.__tostring = self.tostring
 
 	local fill = fill or function() return false end

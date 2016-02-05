@@ -10,7 +10,7 @@ local subpalettes = {
 function MaterialPalette:MaterialPalette( ... ) -- ceiling, floor, wall, decorativeWall )
 	local args = { ... }
 	if #args < #subpalettes then
-		error( "Expected " .. string.rep( "table, ", #subpalettes - 1 ) .. "table.", 2 )
+		error( "Expected " .. string.rep( "table, ", #subpalettes - 1 ) .. "table", 3 )
 	end
 
 	for i, key in ipairs( subpalettes ) do
@@ -70,4 +70,22 @@ function MaterialPalette:import( mp, key )
 	for k, v in pairs( mp[ key ] ) do
 		self[ key ][ k ] = v:duplicate()
 	end
+end
+
+function MaterialPalette:tostring()
+	local str = ""
+
+	for k, v in pairs( self.wall ) do
+		str = str .. tostring( k ) .. " = " .. tostring( v ) .. "\n"
+	end
+
+	return str
+end
+
+function MaterialPalette:getRandomMaterialForKey( key )
+	if not self[ key ] then
+		error( "No such key " .. tostring( key ), 2 )
+	end
+
+	return self[ key ][ math.random( #self[ key ] ) ]
 end

@@ -6,8 +6,11 @@ dofile "Classes/Block.lua"
 dofile "Classes/Point3D.lua"
 dofile "Classes/Wall.lua"
 dofile "Classes/Room.lua"
+dofile "Classes/MaterialPalette.lua"
 
 dofile "Classes/ObjectFactory.lua"
+
+dofile "Materials/WoodPlanksWall.lua"
 
 local testOrigin = Point3D( 191, 4, 835 )
 
@@ -62,6 +65,10 @@ local w = Wall( testOrigin, testOrigin + 4, stoneFactory:getPortableConstructor(
 ]]
 -- w:build()
 
+
 print( "Test Room" )
-local r = Room( 0, testOrigin, testOrigin + 5 )
+
+local p = MaterialPalette( {}, {}, { WoodPlanksWall }, {} )
+
+local r = Room( testOrigin, testOrigin + 4, p )
 r:build()
