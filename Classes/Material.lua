@@ -1,5 +1,5 @@
 
-dofile "block.lua"
+dofile "Classes/Block.lua"
 
 class "Material" extends "Block" {}
 

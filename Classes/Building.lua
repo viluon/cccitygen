@@ -1,5 +1,6 @@
 
-dofile "Structure.lua"
+dofile "Classes/Structure.lua"
+dofile "Interfaces/IHasChildren.lua"
 
 class "Building"
 	extends "Structure"

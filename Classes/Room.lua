@@ -1,10 +1,10 @@
 
-dofile "Structure.lua"
-dofile "Wall.lua"
-dofile "Point3D.lua"
-dofile "Block.lua"
+dofile "Classes/Structure.lua"
+dofile "Classes/Wall.lua"
+dofile "Classes/Point3D.lua"
+dofile "Classes/Block.lua"
 
-dofile "IHasChildren.lua"
+dofile "Interfaces/IHasChildren.lua"
 
 class "Room" extends "Structure" implements "IHasChildren"
 {

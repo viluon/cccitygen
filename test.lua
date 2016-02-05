@@ -1,13 +1,13 @@
 
 dofile "class.lua"
 
-dofile "Structure.lua"
-dofile "Block.lua"
-dofile "Point3D.lua"
-dofile "Wall.lua"
-dofile "Room.lua"
+dofile "Classes/Structure.lua"
+dofile "Classes/Block.lua"
+dofile "Classes/Point3D.lua"
+dofile "Classes/Wall.lua"
+dofile "Classes/Room.lua"
 
-dofile "ObjectFactory.lua"
+dofile "Classes/ObjectFactory.lua"
 
 local testOrigin = Point3D( 191, 4, 835 )
 

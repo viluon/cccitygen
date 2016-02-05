@@ -1,5 +1,5 @@
 
-dofile "Material.lua"
+dofile "Classes/Material.lua"
 
 class "MaterialPalette" {}
 

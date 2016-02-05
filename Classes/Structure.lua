@@ -1,6 +1,6 @@
 
-dofile "Block.lua"
-dofile "Grid3D.lua"
+dofile "Classes/Block.lua"
+dofile "Classes/Grid3D.lua"
 
 class "Structure" extends "Grid3D"
 {

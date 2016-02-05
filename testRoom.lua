@@ -1,5 +1,5 @@
 
 dofile "class.lua"
-dofile "Room.lua"
+dofile "Classes/Room.lua"
 
 local r = Room()

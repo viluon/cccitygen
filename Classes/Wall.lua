@@ -1,7 +1,7 @@
 
-dofile "Grid3D.lua"
-dofile "Point3D.lua"
-dofile "Structure.lua"
+dofile "Classes/Grid3D.lua"
+dofile "Classes/Point3D.lua"
+dofile "Classes/Structure.lua"
 
 class "Wall" extends "Structure"
 {
