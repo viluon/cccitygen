@@ -1,4 +1,3 @@
--
 
 * All overloads for Point3D
 * What about the constructor chain interface?
