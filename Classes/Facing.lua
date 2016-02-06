@@ -19,11 +19,11 @@ function Facing:Facing( d )
 			end
 		end
 
-		error( "Unknown orientation '" .. d:lower() .. "'", 2 )
+		error( "Unknown orientation '" .. d:lower() .. "'", 3 )
 	elseif type( d ) == "number" then
 		self.direction = d % #orientations
 	else
-		error( "Expected string, number or nil", 2 )
+		error( "Expected string, number or nil", 3 )
 	end
 end
 

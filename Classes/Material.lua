@@ -11,7 +11,7 @@ class "Material"
 
 function Material:Material( base )
 	if not base:typeOf( Block ) then
-		error( "Expected Block", 2 )
+		error( "Expected Block", 3 )
 	end
 
 	self.baseBlock = base:duplicate()

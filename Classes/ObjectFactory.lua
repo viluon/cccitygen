@@ -6,7 +6,7 @@ class "ObjectFactory"
 
 function ObjectFactory:ObjectFactory( obj )
 	if type( obj ) ~= "table" or not obj.duplicate then
-		error( "Unsupported object", 2 )
+		error( "Unsupported object", 3 )
 	end
 
 	self.object = obj

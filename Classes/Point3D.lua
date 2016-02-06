@@ -8,7 +8,7 @@ class "Point3D"
 
 function Point3D:Point3D( x, y, z )
 	if type( x ) ~= "number" or type( y ) ~= "number" or type( z ) ~= "number" then
-		error( "Expected number, number, number", 2 )
+		error( "Expected number, number, number", 3 )
 	end
 	
 	self.x = x

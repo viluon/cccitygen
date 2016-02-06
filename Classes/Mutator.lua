@@ -7,7 +7,7 @@ class "Mutator"
 
 function Mutator:Mutator( fn )
 	if type( fn ) ~= "function" then
-		error( "Expected function", 2 )
+		error( "Expected function", 3 )
 	end
 
 	self.mutate = fn

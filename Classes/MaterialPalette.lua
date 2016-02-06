@@ -18,7 +18,7 @@ function MaterialPalette:MaterialPalette( ... ) -- ceiling, floor, wall, decorat
 
 		for k, material in pairs( args[ i ] ) do
 			if not material:typeOf( Material ) then
-				error( "Key '" .. tostring( k ) .. "'' of '" .. key .. "' is not a Material.", 2 )
+				error( "Key '" .. tostring( k ) .. "' of '" .. key .. "' is not a Material.", 3 )
 			end
 
 			self[ key ][ k ] = material:duplicate()
