@@ -1,5 +1,4 @@
 
-dofile "Classes/Material.lua"
 dofile "Classes/Block.lua"
 
 local woodPlanksBlock = Block()
@@ -10,4 +9,4 @@ local function mut( block, x, y, z )
 	--			consists of woodPlanksBlocks.
 end
 
-WoodPlanksWall = Material( woodPlanksBlock )	-- :addMutator( mut )
+OakWoodPlanks = Material( woodPlanksBlock )	-- :addMutator( mut )
