@@ -7,8 +7,18 @@ class "Point3D"
 }
 
 function Point3D:Point3D( x, y, z )
-	if type( x ) ~= "number" or type( y ) ~= "number" or type( z ) ~= "number" then
-		error( "Expected number, number, number", 3 )
+	if type( x ) ~= "number" then
+		error( "Expected (number, number, number) or number", 3 )
+	end
+	if ( type( y ) ~= "number" and y ~= nil ) or ( type( z ) ~= "number" and z ~= nil ) then
+		error( "Expected (number, number, number) or number", 3 )
+	end
+
+	if not y then
+		y = x
+	end
+	if not z then
+		z = y
 	end
 	
 	self.x = x
