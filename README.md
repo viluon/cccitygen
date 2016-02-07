@@ -9,6 +9,7 @@ This project aims at providing a solid, object-oriented base for procedural city
 ~ [@viluon](https://github.com/viluon)
 
 ## Features
+A list of working features implemented to date.
 * Supports full NBT data
 * Blocks have separate ID and block value fields
 
