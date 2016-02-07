@@ -9,3 +9,8 @@
 * Implement require(), dofile() is dumb
 * Building should keep a list of outside walls
 * IDuplicable?
+* Generalize Palette, add RoomPalette
+* Use RoomPalette in :populate() along with BuildingPopulator or something similar
+	* BuildingPopulator will contain a list of rules such as what Rooms the building should use and how should they be connected, how many of them etc
+	* BuildingPopulators will define Building types, for example a family house vs. mall etc
+	* BuildingPopulators should have a clue about how the building is structured (floors, staircases, elevators?)
