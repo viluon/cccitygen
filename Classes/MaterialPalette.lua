@@ -4,7 +4,7 @@ dofile "Classes/Material.lua"
 class "MaterialPalette" {}
 
 local subpalettes = {
-	"ceiling", "floor", "wall", "decorativeWall",
+	"ceiling", "floor", "wall", "decorativeWall", "window",
 }
 
 function MaterialPalette:MaterialPalette( ... ) -- ceiling, floor, wall, decorativeWall )
@@ -88,4 +88,24 @@ function MaterialPalette:getRandomMaterialForKey( key )
 	end
 
 	return self[ key ][ math.random( #self[ key ] ) ]
+end
+
+function MaterialPalette:getFillFunctionForKey( key )
+	return function()
+		return self:getRandomMaterialForKey( key )()
+	end
+end
+
+function MaterialPalette:duplicate()
+	local args = {}
+
+	for i, key in ipairs( subpalettes ) do
+		args[ i ] = {}
+
+		for k, material in pairs( self[ key ] ) do
+			args[ i ][ k ] = material:duplicate()
+		end
+	end
+
+	return MaterialPalette( unpack( args ) )
 end

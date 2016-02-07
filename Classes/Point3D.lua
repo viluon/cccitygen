@@ -52,3 +52,7 @@ end
 function Point3D:unpack()
 	return self.x, self.y, self.z
 end
+
+function Point3D:duplicate()
+	return Point3D( self:unpack() )
+end
