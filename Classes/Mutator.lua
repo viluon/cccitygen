@@ -2,7 +2,7 @@
 class "Mutator"
 {
 	mutate = function() end;
-	link = {};
+	link = nil;
 }
 
 function Mutator:Mutator( fn )

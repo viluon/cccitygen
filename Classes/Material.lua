@@ -18,7 +18,7 @@ function Material:Material( base )
 
 	self.mutators = {}
 
-	self.meta.__call = self.getBlock
+	self.meta.__call = self.apply
 end
 
 function Material:addMutator( mut, pos )
