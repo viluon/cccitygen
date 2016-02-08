@@ -4,6 +4,7 @@ class "Block"
 	name = "minecraft:air";
 	data = 0;
 	tag = {};
+	solid = true;
 }
 
 function Block:place( x, y, z )
