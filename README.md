@@ -10,8 +10,17 @@ This project aims at providing a solid, object-oriented base for procedural city
 
 ## Features
 A list of working features implemented to date.
-* Supports full NBT data
-* Blocks have separate ID and block value fields
+* **Blocks**
+	* Support full NBT data
+	* Separate ID and block value fields
+	* `solid` field for distinction between solid and non-solid blocks
+* **Walls**
+	* Extend Grid3D
+* **Rooms**
+	* Implement IHasChildren
+		* Support for any children that have the `:build()` method implemented
+	* So far only support for exactly 4 Walls, Walls can be theoretically empty though
+	* Ceiling and floor, handled differently than Walls but are in fact instances of Wall
 
 ## Credits
 Thanks to [@Exerro](https://github.com/Exerro) for his *amazing* class library.
