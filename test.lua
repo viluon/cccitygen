@@ -1,4 +1,7 @@
 
+-- Reset dofile
+loaded = {}
+
 dofile "class.lua"
 
 dofile "Classes/Structure.lua"
@@ -6,11 +9,16 @@ dofile "Classes/Block.lua"
 dofile "Classes/Point3D.lua"
 dofile "Classes/Wall.lua"
 dofile "Classes/Room.lua"
+dofile "Classes/Building.lua"
 dofile "Classes/MaterialPalette.lua"
 
 dofile "Classes/ObjectFactory.lua"
 
-dofile "Materials/WoodPlanksWall.lua"
+dofile "Assets/Materials/OakWoodPlanks.lua"
+dofile "Assets/Materials/SpruceWoodPlanks.lua"
+dofile "Assets/Materials/Glass.lua"
+
+dofile "Assets/Mutators/EvenRowsSpruce.lua"
 
 local testOrigin = Point3D( 191, 4, 835 )
 
@@ -65,10 +73,28 @@ local w = Wall( testOrigin, testOrigin + 4, stoneFactory:getPortableConstructor(
 ]]
 -- w:build()
 
+--[[
+	print( "Test Room" )
 
-print( "Test Room" )
+	local p = MaterialPalette( { SpruceWoodPlanks }, { SpruceWoodPlanks }, { OakWoodPlanks }, {}, {} )
 
-local p = MaterialPalette( {}, {}, { WoodPlanksWall }, {} )
+	local roomTestPoint2 = Point3D( testOrigin.x + 10, testOrigin.y + 5, testOrigin.z + 7 )
 
-local r = Room( testOrigin, testOrigin + 4, p )
-r:build()
+	local r = Room( testOrigin, roomTestPoint2, p )
+	r:build()
+]]
+
+
+print( "Test Building!" )
+
+local p = MaterialPalette( { SpruceWoodPlanks }, { SpruceWoodPlanks }, { OakWoodPlanks }, {}, {} )
+p:addMutator( "wall", EvenRowsSpruce )
+
+local b = Building( Point3D( 15 ), "House" )
+local r = Room( Point3D( 1 ), Point3D( 5 ), p )
+
+b:populate( r )
+b:build( testOrigin )
+
+os.startTimer( 1 )
+os.pullEvent "timer"
