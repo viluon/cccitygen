@@ -14,3 +14,5 @@
 	* BuildingPopulator will contain a list of rules such as what Rooms the building should use and how should they be connected, how many of them etc
 	* BuildingPopulators will define Building types, for example a family house vs. mall etc
 	* BuildingPopulators should have a clue about how the building is structured (floors, staircases, elevators?)
+* Rooms should hold the information about windows, Buildings should only link to them
+
