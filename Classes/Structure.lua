@@ -34,13 +34,22 @@ end
 function Structure:build( x, y, z )
 	if not x then
 		x = self.origin.x
+	else
+		x = x + self.origin.x - 1
 	end
+
 	if not y then
 		y = self.origin.y
+	else
+		y = y + self.origin.y - 1
 	end
+
 	if not z then
 		z = self.origin.z
+	else
+		z = z + self.origin.z - 1
 	end
+
 
 	for block, _x, _y, _z in self:iter() do
 		if type( block ) == "table" and block.typeOf and block:typeOf( Block ) then
