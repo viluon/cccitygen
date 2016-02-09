@@ -1,3 +1,4 @@
+
 # cccitygen
 ComputerCraft Procedural City Generation Framework - taking city generation with command computers to the next level.
 
@@ -10,17 +11,37 @@ This project aims at providing a solid, object-oriented base for procedural city
 
 ## Features
 A list of working features implemented to date.
-* **Blocks**
-	* Support full NBT data
+* **Block**
+	* Supports full NBT data
 	* Separate ID and block value fields
 	* `solid` field for distinction between solid and non-solid blocks
-* **Walls**
-	* Extend Grid3D
-* **Rooms**
-	* Implement IHasChildren
+* **Point3D**
+	* Simply stores 3 values, x, y, z
+	* Has overloads for adding Point3Ds or numbers to `self`
+* **Grid3D**
+	* Stores essentially any data in an array of arrays of arrays (3D)
+	* `size` and `origin` fields
+	* Can be (un)serialized to/from a file
+	* Methods for converting coordinates from global to local and vice versa
+	* `Grid3D:iter()` iterates over all elements
+	* Constructor automagically fills up the mesh with a `fill` function
+* **Structure**
+	* Extends Grid3D
+	* `Structure:build()` iterates over Grid3D data and places all Blocks encountered
+* **Room**
+	* Implements IHasChildren
 		* Support for any children that have the `:build()` method implemented
-	* So far only support for exactly 4 Walls, Walls can be theoretically empty though
+	* So far only supports exactly 4 Walls, Walls can be theoretically empty though
 	* Ceiling and floor, handled differently than Walls but are in fact instances of Wall
+* **Material**
+	* Dynamic values with the Mutator class
+* **Mutator**
+	* Can affect a Block depending on its relative position
+	* Simply pass a function accepting `block, x, y, z` to the constructor to create a Mutator
+	* Mutators can be chained (using one Mutator at the beginning of the chain will return a result that passed through the whole chain)
+* **MaterialPalette**
+	* A palette of Materials for Rooms to pick Materials from
+	* Shortcut methods to add Mutators to all Materials in a subpalette
 
 ## Credits
 Thanks to [@Exerro](https://github.com/Exerro) for his *amazing* class library.
