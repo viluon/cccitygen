@@ -3,6 +3,7 @@ dofile "Classes/Structure.lua"
 dofile "Classes/Wall.lua"
 dofile "Classes/Point3D.lua"
 dofile "Classes/Block.lua"
+dofile "Classes/Window.lua"
 
 dofile "Interfaces/IHasChildren.lua"
 
@@ -16,6 +17,7 @@ class "Room" extends "Structure" implements "IHasChildren"
 	floor = {};
 	ceiling = {};
 	palette = {};
+	windows = {};
 }
 
 function Room:Room( a, b, palette )
@@ -46,6 +48,34 @@ function Room:Room( a, b, palette )
 	self.ceiling	= Wall( Point3D( a.x, b.y, a.z ), b, palette.ceiling[ 1 ] )
 
 	self:IHasChildren()
+end
+
+-- Adds a Window to the Room's Wall
+function Room:addWindow( wall, win )
+	local found = false
+
+	if type( wall ) == "string" then
+		if wall == "ceiling" or wall == "floor" then
+			found = true
+			wall = self[ wall ]
+		end
+	elseif type( wall ) == "number" then
+		if self.walls[ wall ] then
+			found = true
+			wall = self.walls[ wall ]
+		end
+	elseif type( wall ) == "table" and wall:typeOf( Wall ) then
+		for i, w in ipairs( self.walls ) do
+			if w == wall then
+				found = true
+				break
+			end
+		end
+	end
+
+	if not found or not win or type( win ) ~= "table" or not win:typeOf( Window ) then
+		error( "Expected (string or number or Wall), Window", 2 )
+	end
 end
 
 function Room:build( x, y, z )
