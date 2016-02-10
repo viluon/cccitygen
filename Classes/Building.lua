@@ -4,8 +4,6 @@ dofile "Classes/Point3D.lua"
 
 class "Building" implements "IHasChildren"
 {
-	-- a = {};
-	-- b = {};
 	size = {};
 	name = "";
 	roomOffset = {
@@ -15,12 +13,11 @@ class "Building" implements "IHasChildren"
 	};
 }
 
-function Building:Building( size, name, roomOffset ) -- from, to, name )
-	--[[
-		if type( from ) ~= "table" or not from:typeOf( Point3D ) or type( to ) ~= "table" or not to:typeOf( Point3D ) then
-			error( "Expected Point3D, Point3D, optional name", 3 )
-		end
-	]]
+function Building:Building( size, name, roomOffset )
+	if type( size ) ~= "table" or not size:typeOf( Point3D ) or
+		( roomOffset ~= nil and ( type( roomOffset ) ~= "table" or not roomOffset:typeOf( Point3D ) ) ) then
+		error( "Expected Point3D, optional name, optional Point3D", 3 )
+	end
 
 	self:IHasChildren()
 
@@ -30,10 +27,7 @@ function Building:Building( size, name, roomOffset ) -- from, to, name )
 		self.roomOffset = Point3D( 0 )
 	end
 
-	self.size = size -- ( to - from ) + 1
-
-	-- self.a = from
-	-- self.b = to
+	self.size = size
 end
 
 function Building:populate( room )
