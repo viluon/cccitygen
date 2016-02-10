@@ -34,6 +34,7 @@ A list of working features implemented to date.
 	* So far only supports exactly 4 Walls, Walls can be theoretically empty though
 	* Ceiling and floor, handled differently than Walls but are in fact instances of Wall
 * **Material**
+	* Pose as shaders for Rooms (Buildings, Walls, Windows, essentially anything that is made of Blocks)
 	* Dynamic values with the Mutator class
 * **Mutator**
 	* Can affect a Block depending on its relative position
