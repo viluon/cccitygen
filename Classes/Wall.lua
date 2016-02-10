@@ -31,3 +31,6 @@ end
 function Wall:updateGrid( fill )
 	self.grid = Grid3D( self.a.x - self.b.x, self.a.y - self.b.y, self.a.z - self.b.z, from.x, from.y, from.z, fill )
 end
+
+--TODO: Wall:cover( block ) -- Resizes the Grid3D (y++) and adds a block on the highest free position in every column
+--		Wait, shouldn't this ^ be implemented in Structure instead?
