@@ -14,13 +14,15 @@ class "Spacing"
 	link = nil;
 }
 
-function Spacing:Spacing( top, bottom, right, left, front, back )
+function Spacing:Spacing( top, bottom, right, left, front, back, obj )
 	self.top	=	top
 	self.bottom	=	bottom
 	self.right	=	right
 	self.left	=	left
 	self.front	=	front
 	self.back	=	back
+
+	self.obj = obj
 
 	self.mt.__add = self.add
 end
@@ -29,6 +31,12 @@ function Spacing:linkTo( obj )
 	if type( obj ) ~= "table" or not obj:typeOf( Grid3D ) then
 		error( "Expected object which is or extends Grid3D", 2 )
 	end
+
+	local oldObj = self.obj
+
+	self.link = obj
+
+	return oldObj
 end
 
 --TODO: Is this the right way to do this? :/
