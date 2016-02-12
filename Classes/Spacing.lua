@@ -22,7 +22,9 @@ function Spacing:Spacing( top, bottom, right, left, front, back, obj )
 	self.front	=	front
 	self.back	=	back
 
-	self.obj = obj
+	if obj then
+		self:linkTo( obj )
+	end
 
 	self.mt.__add = self.add
 end
