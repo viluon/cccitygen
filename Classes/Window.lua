@@ -1,20 +1,22 @@
 
 dofile "Classes/Point3D.lua"
+dofile "Classes/Align2D.lua"
 dofile "Classes/Spacing.lua"
 
 class "Window" extends "Wall"
 {
-	align = "";
+	align = {};
 	spacing = {};
 }
 
-function Window:Window( from, to, spacing, fill )
+function Window:Window( from, to, spacing, align, fill )
 	if type( from ) ~= "table" or not from:typeOf( Point3D ) or type( to ) ~= "table" or not to:typeOf( Point3D ) or
-		type( spacing ) ~= "table" or not spacing:typeOf( Spacing ) then
-		error( "Expected Point3D, Spacing, (Grid3D or Material or fill (function))", 3 )
+		type( spacing ) ~= "table" or not spacing:typeOf( Spacing ) or type( align ) ~= "table" or not align:typeOf( Align2D ) then
+		error( "Expected Point3D, Spacing, Align2D, (Grid3D or Material or fill (function))", 3 )
 	end
 
 	self.spacing = spacing:duplicate()
+	self.align = align:duplicate()
 
 	return self:Wall( from, to, fill )
 end
