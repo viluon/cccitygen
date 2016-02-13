@@ -45,7 +45,7 @@ function Align2D:Align2D( horizontal, vertical )
 	end
 
 	if not found then
-		error( "Expected (number or string), (number or string)", 3 )
+		error( "Expected (number or string), (number or string); where number or string results to a valid align type", 3 )
 	end
 
 	self.horizontal = horizontal
@@ -88,4 +88,8 @@ function Align2D:align( width, height, parentWidth, parentHeight )
 	end
 
 	return x, y, unpack( warnings )
+end
+
+function Align2D:duplicate()
+	return Align2D( self.horizontal, self.vertical )
 end
