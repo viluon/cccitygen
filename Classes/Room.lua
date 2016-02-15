@@ -7,6 +7,7 @@ dofile "Classes/Window.lua"
 
 dofile "Interfaces/IHasChildren.lua"
 
+--TODO: Room shouldn't actually extend Structure, right?
 class "Room" extends "Structure" implements "IHasChildren"
 {
 	a = {};
@@ -43,6 +44,7 @@ function Room:Room( a, b, palette )
 	self.walls[ 3 ]	= Wall( Point3D( b.x, a.y, a.z ), b, palette:getFillFunctionForKey( "wall" ) )
 	self.walls[ 4 ]	= Wall( Point3D( a.x, a.y, b.z ), b, palette:getFillFunctionForKey( "wall" ) )
 
+	--TODO: Shouldn't floor and ceiling belong to self.walls?
 	-- Generate floor and ceiling
 	self.floor		= Wall( a, Point3D( b.x, a.y, b.z ), palette.floor[ 1 ] )
 	self.ceiling	= Wall( Point3D( a.x, b.y, a.z ), b, palette.ceiling[ 1 ] )
@@ -76,6 +78,10 @@ function Room:addWindow( wall, win )
 	if not found or not win or type( win ) ~= "table" or not win:typeOf( Window ) then
 		error( "Expected (string or number or Wall), Window", 2 )
 	end
+
+	self.windows[ wall ] = self.windows[ wall ] or {}
+	self.windows[ wall ][ #self.windows[ wall ] + 1 ] = win
+	win:fitToWall( wall, #self.windows[ wall ] )
 end
 
 function Room:build( x, y, z )
@@ -108,6 +114,11 @@ function Room:build( x, y, z )
 	for i, wall in ipairs( self.walls ) do
 		print( "Building wall", i )
 		wall:build( x, y, z )
+
+		for ii, win in ipairs( self.windows[ wall ] ) do
+			print( "  Building window", ii )
+			win:build( x, y, z )
+		end
 	end
 
 	for _, child in self:iterOverChildren() do

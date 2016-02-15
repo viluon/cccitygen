@@ -6,6 +6,7 @@ dofile "Classes/Spacing.lua"
 class "Window" extends "Wall"
 {
 	align = {};
+	offset = {};
 	spacing = {};
 }
 
@@ -15,8 +16,17 @@ function Window:Window( from, to, spacing, align, fill )
 		error( "Expected Point3D, Spacing, Align2D, (Grid3D or Material or fill (function))", 3 )
 	end
 
+	self.offset = Point3D( 0 )
 	self.spacing = spacing:duplicate()
 	self.align = align:duplicate()
 
 	return self:Wall( from, to, fill )
+end
+
+function Window:fitToWall( wall, index )
+	--TODO: Current work
+end
+
+function Window:build( x, y, z )
+	return self.super:build( ( Point3D( x, y, z ) + self.offset ):unpack() )
 end

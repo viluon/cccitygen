@@ -50,6 +50,8 @@ function Align2D:Align2D( horizontal, vertical )
 
 	self.horizontal = horizontal
 	self.vertical = vertical
+
+	self.meta.__call = self.align
 end
 
 function Align2D:align( width, height, parentWidth, parentHeight )
