@@ -3,20 +3,28 @@ dofile "Classes/Grid3D.lua"
 dofile "Classes/Point3D.lua"
 dofile "Classes/Structure.lua"
 dofile "Classes/Material.lua"
+dofile "Classes/Facing.lua"
 
 class "Wall" extends "Structure"
 {
 	a = {};
 	b = {};
+	facing = {};
 }
 
-function Wall:Wall( from, to, fill )
-	if not from:typeOf( Point3D ) or not to:typeOf( Point3D ) or not ( type( fill ) == "function" or fill:typeOf( Grid3D ) or fill:typeOf( Material ) ) then
-		error( "Expected Point3D, Point3D, (Grid3D or Material or fill (function))", 3 )
+function Wall:Wall( from, to, facing, fill )
+	if not from:typeOf( Point3D ) or not to:typeOf( Point3D ) or not facing:typeOf( Facing ) or not ( type( fill ) == "function" or fill:typeOf( Grid3D ) or fill:typeOf( Material ) ) then
+		error( "Expected Point3D, Point3D, Facing, (Grid3D or Material or fill (function))", 3 )
 	end
+
+	from = from:duplicate()
+	to = to:duplicate()
+	facing = facing:duplicate()
 
 	self.a = from
 	self.b = to
+
+	self.facing = facing
 
 	size = ( to - from ) + 1
 

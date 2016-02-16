@@ -4,11 +4,11 @@ dofile "Classes/Wall.lua"
 dofile "Classes/Point3D.lua"
 dofile "Classes/Block.lua"
 dofile "Classes/Window.lua"
+dofile "Classes/Facing.lua"
 
 dofile "Interfaces/IHasChildren.lua"
 
---TODO: Room shouldn't actually extend Structure, right?
-class "Room" extends "Structure" implements "IHasChildren"
+class "Room" implements "IHasChildren"
 {
 	a = {};
 	b = {};
@@ -28,6 +28,9 @@ function Room:Room( a, b, palette )
 
 	--TODO: IN_PROGRESS: just let a and b be relative (i.e. a = 0, 0, 0 (or 1?)), let the rest around here work the way it did
 
+	a = a:duplicate()
+	b = b:duplicate()
+
 	self.palette = palette
 	self.a = a
 	self.b = b
@@ -39,15 +42,18 @@ function Room:Room( a, b, palette )
 
 	local fill = function() local x = Block() x.name = "minecraft:glass" return x end
 
-	self.walls[ 1 ]	= Wall( a, Point3D( b.x, b.y, a.z ), palette:getFillFunctionForKey( "wall" ) )
-	self.walls[ 2 ]	= Wall( a, Point3D( a.x, b.y, b.z ), palette:getFillFunctionForKey( "wall" ) )
-	self.walls[ 3 ]	= Wall( Point3D( b.x, a.y, a.z ), b, palette:getFillFunctionForKey( "wall" ) )
-	self.walls[ 4 ]	= Wall( Point3D( a.x, a.y, b.z ), b, palette:getFillFunctionForKey( "wall" ) )
+	-- Note: Facing here determines the orientation of the Wall from the inside of the Room
+	self.walls[ 1 ]	= Wall( a, Point3D( b.x, b.y, a.z ), Facing( "south" ), palette:getFillFunctionForKey( "wall" ) )
+	self.walls[ 2 ]	= Wall( a, Point3D( a.x, b.y, b.z ), Facing( "east" ), palette:getFillFunctionForKey( "wall" ) )
+	self.walls[ 3 ]	= Wall( Point3D( b.x, a.y, a.z ), b, Facing( "west" ), palette:getFillFunctionForKey( "wall" ) )
+	self.walls[ 4 ]	= Wall( Point3D( a.x, a.y, b.z ), b, Facing( "north" ), palette:getFillFunctionForKey( "wall" ) )
 
 	--TODO: Shouldn't floor and ceiling belong to self.walls?
+	--		Yeah, that'd be easier to handle. They could have indices like -1 and 0... Although ipairs wouldn't work
+
 	-- Generate floor and ceiling
-	self.floor		= Wall( a, Point3D( b.x, a.y, b.z ), palette.floor[ 1 ] )
-	self.ceiling	= Wall( Point3D( a.x, b.y, a.z ), b, palette.ceiling[ 1 ] )
+	self.floor		= Wall( a, Point3D( b.x, a.y, b.z ), Facing( "north" ), palette.floor[ 1 ] )
+	self.ceiling	= Wall( Point3D( a.x, b.y, a.z ), b, Facing( "north" ), palette.ceiling[ 1 ] )
 
 	self:IHasChildren()
 end
@@ -115,9 +121,11 @@ function Room:build( x, y, z )
 		print( "Building wall", i )
 		wall:build( x, y, z )
 
-		for ii, win in ipairs( self.windows[ wall ] ) do
-			print( "  Building window", ii )
-			win:build( x, y, z )
+		if self.windows[ wall ] then
+			for ii, win in ipairs( self.windows[ wall ] ) do
+				print( "  Building window", ii )
+				win:build( x, y, z )
+			end
 		end
 	end
 
@@ -125,8 +133,6 @@ function Room:build( x, y, z )
 		print( "Building furniture", _ )
 		child:build( x, y, z )
 	end
-
-	-- return self.super:build( x, y, z )
 end
 
 function Room:duplicate()
