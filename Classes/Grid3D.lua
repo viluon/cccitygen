@@ -1,53 +1,44 @@
 
+dofile "Classes/Point3D.lua"
+
 class "Grid3D"
 {
-	size = {
-		x = 0;
-		y = 0;
-		z = 0;
-	};
-	origin = {
-		x = 0;
-		y = 0;
-		z = 0;
-	};
+	size = {};
 	data = {};
+	origin = {};
 }
 
-function Grid3D:Grid3D( sizeX, sizeY, sizeZ, originX, originY, originZ, fill )
-	if not sizeX then
+function Grid3D:Grid3D( size, origin, fill )
+	if not size then
 		print( "Warning: Initializing Grid3D with zero size isn't recommended." )
+
+		self.size = Point3D( 0 )
+		self.origin = origin and origin:duplicate() or Point3D( 0 )
+		self.data = {}
 		return
 	end
-	
-	sizeX = math.abs( sizeX )
-	sizeY = math.abs( sizeY )
-	sizeZ = math.abs( sizeZ )
 
-	self.size = {}
+	if type( size ) ~= "table" or not size:typeOf( Point3D ) or type( origin ) ~= "table" or not origin:typeOf( Point3D ) then
+		error( "Expected (Point3D or nil), Point3D, fill (function)", 3 )
+	end
 
-	self.size.x = sizeX
-	self.size.y = sizeY
-	self.size.z = sizeZ
+	self.size = size:duplicate()
 
-	self.origin = {}
+	self.size.x = math.abs( self.size.x )
+	self.size.y = math.abs( self.size.y )
+	self.size.z = math.abs( self.size.z )
 
-	self.origin.x = originX
-	self.origin.y = originY
-	self.origin.z = originZ
+	self.origin = origin:duplicate()
 
 	self.data = {}
 
-	--TODO: Class should assign tostring automagically
-	self.meta.__tostring = self.tostring
-
 	local fill = fill or function() return false end
 
-	for z = 1, sizeZ do
+	for z = 1, self.size.z do
 		self.data[ z ] = {}
-		for y = 1, sizeY do
+		for y = 1, self.size.y do
 			self.data[ z ][ y ] = {}
-			for x = 1, sizeX do
+			for x = 1, self.size.x do
 				self.data[ z ][ y ][ x ] = fill( x, y, z, self )
 			end
 		end

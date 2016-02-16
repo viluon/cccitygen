@@ -28,7 +28,7 @@ function Wall:Wall( from, to, facing, fill )
 
 	size = ( to - from ) + 1
 
-	return self:Structure( "Wall", size.x, size.y, size.z, from.x, from.y, from.z, fill )
+	return self:Structure( "Wall", size, from, fill )
 end
 
 function Wall:tostring()
