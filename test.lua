@@ -19,10 +19,11 @@ dofile "Assets/Materials/SpruceWoodPlanks.lua"
 dofile "Assets/Materials/Glass.lua"
 
 dofile "Assets/Mutators/EvenRowsSpruce.lua"
+dofile "Assets/Mutators/TopRowsSpruce.lua"
 
 local testOrigin = Point3D( 191, 4, 835 )
 
-commands.fill( table.concat( { testOrigin:unpack() }, " " ) .. " " .. table.concat( { ( testOrigin + 25 ):unpack() }, " " ) .. " minecraft:air" )
+commands.fill( testOrigin:getCoordinatesForCommand() .. " " .. ( testOrigin + 25 ):getCoordinatesForCommand() .. " minecraft:air" )
 
 local stoneBlock = Block()
 stoneBlock.name = "minecraft:stone"
@@ -88,7 +89,7 @@ local w = Wall( testOrigin, testOrigin + 4, stoneFactory:getPortableConstructor(
 print( "Test Building!" )
 
 local p = MaterialPalette( { SpruceWoodPlanks }, { SpruceWoodPlanks }, { OakWoodPlanks }, {}, {} )
-p:addMutator( "wall", EvenRowsSpruce )
+--p:addMutator( "wall", TopRowsSpruce )
 
 local b = Building( Point3D( 15 ), "House" )
 local r = Room( Point3D( 1 ), Point3D( 5 ), p )
