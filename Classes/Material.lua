@@ -54,11 +54,12 @@ function Material:removeMutator( mut )
 	error( "No mutator found", 2 )
 end
 
-function Material:apply( x, y, z )
+function Material:apply( ... )
+	local args = { ... }
 	local result = self.baseBlock:duplicate()
 
 	for i, mutator in ipairs( self.mutators ) do
-		result = mutator:apply( result, x, y, z )
+		result = mutator:apply( result, unpack( args ) )
 	end
 
 	return result
@@ -68,6 +69,8 @@ function Material:duplicate()
 	local d = Material( self.baseBlock:duplicate() )
 
 	for i, mutator in ipairs( self.mutators ) do
+		-- Note: Mutators aren't duplicated, therefore we can use removeMutator safely anywhere with any Material and any Mutator
+		--			(It doesn't really break anything, since Mutator only stores the mutate function)
 		d:addMutator( mutator )
 	end
 
