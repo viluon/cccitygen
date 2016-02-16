@@ -48,7 +48,7 @@ function Grid3D:Grid3D( sizeX, sizeY, sizeZ, originX, originY, originZ, fill )
 		for y = 1, sizeY do
 			self.data[ z ][ y ] = {}
 			for x = 1, sizeX do
-				self.data[ z ][ y ][ x ] = fill( x, y, z )
+				self.data[ z ][ y ][ x ] = fill( x, y, z, self )
 			end
 		end
 	end
