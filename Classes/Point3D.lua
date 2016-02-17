@@ -1,5 +1,7 @@
 
-class "Point3D"
+dofile "Interfaces/ISupportsConstructorChain.lua"
+
+class "Point3D" implements "ISupportsConstructorChain"
 {
 	x = 0;
 	y = 0;
@@ -27,6 +29,8 @@ function Point3D:Point3D( x, y, z )
 
 	self.meta.__sub = self.sub
 	self.meta.__add = self.add
+
+	self:ISupportsConstructorChain()
 end
 
 function Point3D:sub( b )
