@@ -5,6 +5,7 @@ ComputerCraft Procedural City Generation Framework - taking city generation with
 [![GitHub issues](https://img.shields.io/github/issues/viluon/cccitygen.svg)](https://github.com/viluon/cccitygen/issues)
 [![Maintenance](https://img.shields.io/maintenance/yes!/2016.svg)](https://github.com/viluon/cccitygen/commits/master)
 [![GitHub license](https://img.shields.io/github/license/viluon/cccitygen.svg)](./LICENSE.md)
+[![Join the chat at https://gitter.im/viluon/cccitygen](https://badges.gitter.im/viluon/cccitygen.svg)](https://gitter.im/viluon/cccitygen?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This project aims at providing a solid, object-oriented base for procedural city generation in Minecraft. Rather than being a single script (as most of other city generators out there), CCCG mirrors the hierarchy of real world cities in OOP, from districts down to furniture in individual rooms, and uses this pattern to rebuild these structures in Minecraft worlds, procedurally. Apart from being a framework, it also includes example city generation scripts and working assets that can be used freely in any other project (open source FTW! All contents of this repository are licensed under the terms of the GPL v3.0 license).
 
