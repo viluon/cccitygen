@@ -1,11 +1,11 @@
 
+local orientations = {
+	"north", "east", "south", "west",
+}
+
 class "Facing"
 {
 	direction = 0;
-}
-
-local orientations = {
-	"north", "east", "south", "west",
 }
 
 function Facing:Facing( d )
@@ -31,6 +31,25 @@ function Facing:tostring()
 	return orientations[ self.direction ]
 end
 
+function Facing:multiply( x, y, z )
+	if self.direction == "north" then
+		z = -z
+	elseif self.direction == "east" then
+
+	elseif self.direction == "south" then
+
+	elseif self.direction == "west" then
+		x = -x
+	end
+
+	return x, y, z
+end
+
+function Facing:rotateAround( point, origin )
+	local relative = point - origin
+	
+end
+
 function Facing:turnRight( n )
 	n = n or 1
 	n = n % #orientations
@@ -51,4 +70,8 @@ function Facing:turnLeft( n )
 	else
 		self.direction = self.direction - n
 	end
+end
+
+function Facing:duplicate()
+	return Facing( self.direction )
 end
